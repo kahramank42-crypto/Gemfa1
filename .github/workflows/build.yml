@@ -1,9 +1,10 @@
 name: Yazılım Derleme
 
+# Bu bölüm derlemenin ne zaman çalışacağını belirler
 on:
-  push:
-    branches: [ "main" ]   # Ana dala dosya yüklendiğinde çalışır
-  workflow_dispatch:        # Elle başlatma tuşu (Run workflow)
+  push:          # Dosya yüklendiğinde veya değiştirildiğinde
+    branches: [ "main" ]
+  workflow_dispatch:  # Elle başlatmak için “Run workflow” düğmesini aktif eder
 
 jobs:
   build:
