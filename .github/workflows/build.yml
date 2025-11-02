@@ -1,13 +1,13 @@
-name: Firmware Derleme
+name: Yazılım Derleme
 
 on:
   push:
-    branches: [ "main" ]   # Ana dala her yükleme olduğunda çalışır
-  workflow_dispatch:        # Manuel olarak "Run workflow" tuşuyla da başlatılabilir
+    branches: [ "main" ]   # Ana dala dosya yüklendiğinde çalışır
+  workflow_dispatch:        # Elle başlatma tuşu (Run workflow)
 
 jobs:
   build:
-    runs-on: ubuntu-latest   # GitHub'ın Linux tabanlı sanal makinesi
+    runs-on: ubuntu-latest   # GitHub’ın kendi Linux sistemi üzerinde çalışır
 
     steps:
     - name: Kodu indir
@@ -31,7 +31,7 @@ jobs:
         arduino-cli compile --fqbn esp32:esp32:esp32 . --build-path ./build
 
     - name: Çıktı dosyasını kaydet
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: firmware
         path: build/*.bin
