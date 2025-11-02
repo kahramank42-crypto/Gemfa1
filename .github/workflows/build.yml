@@ -15,8 +15,6 @@ jobs:
 
     - name: Arduino CLI kur
       uses: arduino/setup-arduino-cli@v1
-      with:
-        version: 0.35.3
 
     - name: ESP32 platformu ve kutuphaneleri yukle
       run: |
