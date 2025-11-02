@@ -1,36 +1,36 @@
-name: Yazılım Derleme
+name: Yazilim Derleme
 
-# Bu bölüm derlemenin ne zaman çalışacağını belirler
 on:
-  push:          # Dosya yüklendiğinde veya değiştirildiğinde
+  push:
     branches: [ "main" ]
-  workflow_dispatch:  # Elle başlatmak için “Run workflow” düğmesini aktif eder
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest   # GitHub’ın kendi Linux sistemi üzerinde çalışır
+    runs-on: ubuntu-latest
 
     steps:
     - name: Kodu indir
       uses: actions/checkout@v3
-- name: Arduino CLI kur
-  uses: arduino/setup-arduino-cli@v1
-  with:
-    version: 0.35.3
 
-    - name: ESP32 platformu ve kütüphaneleri yükle
+    - name: Arduino CLI kur
+      uses: arduino/setup-arduino-cli@v1
+      with:
+        version: 0.35.3
+
+    - name: ESP32 platformu ve kutuphaneleri yukle
       run: |
         arduino-cli core update-index
         arduino-cli core install esp32:esp32
         arduino-cli lib install "DallasTemperature"
         arduino-cli lib install "OneWire"
 
-    - name: Kod derle
+    - name: Kodu derle
       run: |
         mkdir -p build
         arduino-cli compile --fqbn esp32:esp32:esp32 . --build-path ./build
 
-    - name: Çıktı dosyasını kaydet
+    - name: Cikti dosyasini kaydet
       uses: actions/upload-artifact@v4
       with:
         name: firmware
